@@ -21,7 +21,7 @@ export const mapeoArray = () => {
 };
 
 /*--------CREAR EL SELECT---------*/
-document.addEventListener('DOMContentLoaded', () => { 
+document.addEventListener('DOMContentLoaded', () => {
   // Crear select de año
   const divFilters = document.createElement("div");
   const spanYear = document.createElement("span");
@@ -76,6 +76,12 @@ export const filtrarCochesPorAño = () => {
 
 /*---- CREAR DIVS DE CONTENIDO ----*/
 async function crearDivContenido() {
+  // Limpiar el contenido anterior
+  const existingContent = document.querySelector('.container');
+  if (existingContent) {
+    existingContent.remove();
+  }
+
   const cochesFiltrados = await filtrarCochesPorAño(); 
 
   const h1 = document.createElement("h1");
