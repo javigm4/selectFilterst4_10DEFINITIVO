@@ -109,13 +109,11 @@ async function crearDivContenido() {
   
   crearDivContenido();
  
-  setTimeout(() => {
     document.getElementById('selectYear').addEventListener('change', async () => {
       await crearDivContenido(); // Vuelve a crear el contenido cuando cambia la selección
     });
   
     crearDivContenido(); // Crear contenido inicial
-  }, 0);
   //asdhjk
 /*---------------------------------------*/
 
