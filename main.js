@@ -27,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => { //esto lo que hace es que 
   const spanYear = document.createElement("span");
   const strongYear = document.createElement("strong");
   strongYear.textContent = "Year: ";
+  const spanMake = document.createElement("span");
+  const strongMake = document.createElement("strong");
+  strongYear.textContent = "Make: ";
 
   //selects:
   const selectYear = document.createElement("select");//CREO EL SELECT
@@ -47,6 +50,8 @@ document.addEventListener('DOMContentLoaded', () => { //esto lo que hace es que 
   spanYear.appendChild(strongYear);
   divFilters.appendChild(spanYear);
   divFilters.appendChild(selectYear);
+  spanYear.appendChild(strongMake);
+  divFilters.appendChild(spanMake);
   divFilters.appendChild(selectMake);
   document.body.appendChild(divFilters);
 
