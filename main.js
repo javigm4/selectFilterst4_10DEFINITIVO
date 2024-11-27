@@ -21,25 +21,28 @@ export const mapeoArray = () => {
 };
 
 /*--------CREAR EL SELECT---------*/
-document.addEventListener('DOMContentLoaded', () => {
-  // Crear select de año
+document.addEventListener('DOMContentLoaded', () => { //esto lo que hace es que se ejecute cuando se cargue todo el documento, y garantiza que el select  esté en el dom cuadno añadamos el addeventlistener del select
+  //creo los divs
   const divFilters = document.createElement("div");
   const spanYear = document.createElement("span");
   const strongYear = document.createElement("strong");
   strongYear.textContent = "Year: ";
-  const selectYear = document.createElement("select");
+
+  //selects:
+  const selectYear = document.createElement("select");//CREO EL SELECT
   selectYear.id = "selectYear";
+  const selectMake = document.createElement("select");//Creo el select de Make
+  selectMake.id = "selectMake";
 
   const years = datosCoche.cars.map((coche) => coche.year);
   const sortedYears = [...new Set(years.map((year) => Number(year)))] 
     .sort((a, b) => a - b);
+  const makes = datosCoche.cars.map((coche) => coche.make);
+  
 
-  sortedYears.forEach((opcion) => {
-    const option = document.createElement("option");
-    option.value = opcion;
-    option.textContent = opcion;
-    selectYear.appendChild(option);
-  });
+  crearOpciones(sortedYears,selectYear);
+  crearOpciones(makes,selectMake);
+
 
   spanYear.appendChild(strongYear);
   divFilters.appendChild(spanYear);
@@ -55,36 +58,47 @@ document.addEventListener('DOMContentLoaded', () => {
   crearDivContenido();
 });
 
+//crearOpciones del select
+export const crearOpciones = (array,select) =>{
+  array.forEach((opcion) => {
+    const option = document.createElement("option");
+    option.value = opcion;
+    option.textContent = opcion;
+    select.appendChild(option);
+  });
+
+}
 /*---- FILTRAR COCHES POR AÑO ----*/
 export const filtrarCochesPorAño = () => {
   return new Promise((resolve, reject) => {
     mapeoArray().then((cochesArray) => {
       const añoSeleccionado = document.getElementById('selectYear').value;
+      const marcaSeleccionada = document.getElementById('selectMake').value;
       
       cochesArray = cochesArray.filter(coche => coche.getYear() == Number(añoSeleccionado)); 
+      cochesArray = cochesArray.filter(coche => coche.getMake() == marcaSeleccionada);
 
       if(cochesArray.length > 0){
         resolve(cochesArray);
       } else {
-        reject("No se han encontrado coches con ese año");
+        reject("No se han encontrado coches con esos datos");
       }
     }).catch((error) => {
       reject(error); 
     });
   });
 };
-
+ 
 /*---- CREAR DIVS DE CONTENIDO ----*/
-async function crearDivContenido() {
-  // Limpiar el contenido anterior
+async function crearDivContenido() { 
   const existingContent = document.querySelector('.container');
-  if (existingContent) {
+  if (existingContent) {//esta condicional sirve para borrar el container (para no sobreescribirlo)
     existingContent.remove();
   }
 
-  const cochesFiltrados = await filtrarCochesPorAño(); 
+  const cochesFiltrados = await filtrarCochesPorAño(); //creamos el array de coches filtrados gracias a la funcion de filtrarCochesPorAño();
 
-  const h1 = document.createElement("h1");
+  const h1 = document.createElement("h1"); 
   h1.textContent = "Coches según su año";
   const divContainer = document.createElement("div");
   divContainer.classList.add("container");
@@ -92,7 +106,7 @@ async function crearDivContenido() {
   const divBlock = document.createElement("div");
   divBlock.classList.add("block");
 
-  cochesFiltrados.forEach((car) => {
+  cochesFiltrados.forEach((car) => { //por cada coche, creamos un div con sus datos
     const div = document.createElement("div");
 
     const pModeloMake = document.createElement("p");
