@@ -107,13 +107,14 @@ async function crearDivContenido() {
 
   //esto hace que al seleccionar una opcion (change) se ejecute de numevo crearDivContenido
   
-  crearDivContenido();
  
+  setTimeout(() => {
     document.getElementById('selectYear').addEventListener('change', async () => {
       await crearDivContenido(); // Vuelve a crear el contenido cuando cambia la selección
     });
   
     crearDivContenido(); // Crear contenido inicial
+  }, 0);
   //asdhjk
 /*---------------------------------------*/
 
