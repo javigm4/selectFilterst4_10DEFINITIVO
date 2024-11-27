@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => { //esto lo que hace es que 
   spanYear.appendChild(strongYear);
   divFilters.appendChild(spanYear);
   divFilters.appendChild(selectYear);
+  divFilters.appendChild(selectMake);
   document.body.appendChild(divFilters);
 
   // Añadir el eventListener para filtrar coches cuando cambie la selección
