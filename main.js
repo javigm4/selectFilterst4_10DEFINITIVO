@@ -59,6 +59,9 @@ document.addEventListener('DOMContentLoaded', () => { //esto lo que hace es que 
   selectYear.addEventListener('change', async () => {
     await crearDivContenido(); // Vuelve a crear el contenido cuando cambia la selección
   });
+  selectMake.addEventListener('change', async () => {
+    await crearDivContenido(); // Vuelve a crear el contenido cuando cambia la selección
+  });
 
   // Crear el contenido inicial
   crearDivContenido();
