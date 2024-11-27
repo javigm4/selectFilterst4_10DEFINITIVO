@@ -105,6 +105,10 @@ async function crearDivContenido() {
 }
   //ya tenemos las funciones y las promesas creadas asi que vamos a ejecutar la de crear los div
 
+  //esto hace que al seleccionar una opcion (change) se ejecute de numevo crearDivContenido
+  document.getElementById('selectYear').addEventListener('change', async () => {
+    await crearDivContenido(); // Vuelve a crear el contenido cuando cambia la selección
+  });
   crearDivContenido();
  
 
